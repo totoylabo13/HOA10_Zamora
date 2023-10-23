@@ -1,0 +1,48 @@
+- name: Install Java
+  apt:
+    name: openjdk-11-jre
+    state: present
+
+- name: Add Elastic Search APT repository key
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add Elastic Search APT repository key
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+    filename: elastic-7.x
+
+- name: Install Elastic Search
+  apt:
+    name: elasticsearch
+    state: present
+
+- name: Start Elastic Search
+  service:
+    name: elasticsearch
+    state: started
+    enabled: yes
+
+- name: Install Kibana
+  apt:
+    name: kibana
+    state: present
+
+- name: Start Kibana
+  service:
+    name: kibana
+    state: started
+    enabled: yes
+
+- name: Install Logstash
+  apt:
+    name: logstash
+    state: present
+
+- name: Start Logstash
+  service:
+    name: logstash
+    state: started
+    enabled: yes
